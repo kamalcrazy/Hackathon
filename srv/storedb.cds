@@ -48,6 +48,19 @@ annotate StoreDB.BuisinessPartner with @(
             $Type : 'UI.DataField',
             Value : is_gstin_number
         },
+         {
+            $Type : 'UI.DataField',
+            Value : is_vendor
+        },
+         {
+            $Type : 'UI.DataField',
+            Value : is_customer
+        },
+           {
+            $Type : 'UI.DataField',
+            Value : is_gstn_registered
+        },
+
 
     ],
     UI.SelectionFields: [ name,city],    
@@ -82,6 +95,19 @@ annotate StoreDB.BuisinessPartner with @(
             $Type : 'UI.DataField',
             Value : is_gstin_number,
         },
+        {
+            $Type : 'UI.DataField',
+            Value : is_vendor,
+        },
+         {
+            $Type : 'UI.DataField',
+            Value : is_customer,
+        },
+           {
+            $Type : 'UI.DataField',
+            Value : is_gstn_registered,
+        },
+
             
           
         ],

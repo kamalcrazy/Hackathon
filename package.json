@@ -1,7 +1,7 @@
 {
-  "name": "Hackathon",
+  "name": "storedb",
   "version": "1.0.0",
-  "description": "my project.",
+  "description": "my  project.",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
@@ -16,6 +16,21 @@
   "scripts": {
     "start": "cds-serve",
     "watch-businesspartner": "cds watch --open businesspartner/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "fiori": {
+      "lean_draft": true,
+      "bypass_draft": true
+    },
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": "db.sqlite"
+        }
+      }
+  }
+
   },
   "sapux": [
     "app/businesspartner"
