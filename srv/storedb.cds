@@ -403,32 +403,31 @@ annotate StoreDB.Stock with @(
     UI.LineItem: [
         {
             $Type : 'UI.DataField',
-            Value : store_id
+            Value : store_id_ID
         },
         
         {
             $Type : 'UI.DataField',
-            Value : product_id
+            Value : product_id_ID
         },
         
          {
-            Label: 'State',
+            Label: 'Stock Quantity',
             Value: stock_qty
         },   
 
-    ],
-    UI.SelectionFields: [ name,city],    
+    ], 
     UI.FieldGroup #StoreInformation : {
         $Type : 'UI.FieldGroupType',
         Data : [
             {
             $Type : 'UI.DataField',
-            Value : store_id,
+            Value : store_id_ID,
         },
         
         {
             $Type : 'UI.DataField',
-            Value : product_id,
+            Value : product_id_ID,
         },
         
          {

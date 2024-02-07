@@ -70,9 +70,9 @@ entity Product : cuid, managed {
 }
 entity Stock: cuid, managed {
     @title: 'Store ID'
-    store_id: String(23);
+    store_id: Association to Store;
         @title: 'Product ID'
-    product_id:String(5);
+    product_id:Association to Product;
         @title: 'Stock Quantity'
     stock_qty: Integer;
 }
