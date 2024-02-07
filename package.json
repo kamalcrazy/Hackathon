@@ -15,7 +15,8 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-businesspartner": "cds watch --open businesspartner/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-businesspartner": "cds watch --open businesspartner/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-store": "cds watch --open store/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "fiori": {
@@ -29,10 +30,10 @@
           "url": "db.sqlite"
         }
       }
-  }
-
+    }
   },
   "sapux": [
-    "app/businesspartner"
+    "app/businesspartner",
+    "app/store"
   ]
 }

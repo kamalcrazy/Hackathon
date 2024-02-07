@@ -1,6 +1,7 @@
 using { com.kamal.storedb as db } from '../db/schema';
 service StoreDB {
     entity BuisinessPartner as projection on db.BuisinessPartner;
+     entity Store as projection on db.Store;
     entity States as projection on db.States{
         @UI.Hidden: true
         ID,
@@ -10,6 +11,7 @@ service StoreDB {
 }
 annotate StoreDB.BuisinessPartner with @odata.draft.enabled;
 annotate StoreDB.States with @odata.draft.enabled;
+annotate StoreDB.Store with @odata.draft.enabled;
 annotate StoreDB.BuisinessPartner  with {
     name      @assert.format: '^[a-zA-Z]{2,}$';
     pincode @assert.format: '^[1-9][0-9]{5}$';
@@ -43,6 +45,10 @@ annotate StoreDB.BuisinessPartner with @(
          {
             Label: 'State',
             Value: state.code
+        },  
+         {
+            Label: 'State',
+            Value: pincode
         },  
          {
             $Type : 'UI.DataField',
@@ -91,6 +97,10 @@ annotate StoreDB.BuisinessPartner with @(
                 Label :'State',
                 Value :state_ID,
             },
+             {
+            Label: 'State',
+            Value: pincode,
+        },  
             {
             $Type : 'UI.DataField',
             Value : is_gstin_number,
@@ -189,3 +199,123 @@ annotate StoreDB.BuisinessPartner  with {
     )
 };
 
+/*STORE*/
+
+
+
+
+annotate StoreDB.Store with @(
+    UI.LineItem: [
+        {
+            $Type : 'UI.DataField',
+            Value : store_id
+        },
+        
+        {
+            $Type : 'UI.DataField',
+            Value : name
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : address_1
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : address_2
+        },
+          
+              {
+            $Type : 'UI.DataField',
+            Value : city
+        },
+         {
+            Label: 'State',
+            Value: state.code
+        }, 
+         {
+            Label: 'State',
+            Value: pincode
+        },   
+
+    ],
+    UI.SelectionFields: [ name,city],    
+    UI.FieldGroup #StoreInformation : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : store_id,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : name,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : address_1,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : address_2,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : city,
+            },
+            {
+                Label :'State',
+                Value :state_ID,
+            },
+             {
+            Label: 'State',
+            Value: pincode,
+        },  
+            
+          
+        ],
+    },
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'StoreInfoFacet',
+            Label : 'StoreInformation',
+            Target : '@UI.FieldGroup#StoreInformation',
+        },
+       /* 
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'StudentLanguagesFacet',
+            Label : 'Student Languages Information',
+            Target : 'Languages/@UI.LineItem',
+        },
+      */  
+    ],
+    
+);
+annotate StoreDB.Store  with {
+     
+   state @(
+        Common.Text:state.description,
+        Common.TextArrangement: #TextOnly,
+        Common.ValueListWithFixedValues: true,
+        Common.ValueList : {
+            Label: 'States',
+            CollectionPath : 'States',
+            Parameters: [
+                {
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : state_ID,
+                    ValueListProperty : 'ID'
+                },
+                {
+                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'code'
+                },
+                {
+                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'description'
+                },
+            ]
+        }
+    )
+};

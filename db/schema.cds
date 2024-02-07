@@ -38,5 +38,21 @@ entity States : cuid, managed {
     description: String(50);
 }
 
+entity Store: cuid, managed {
+    @title: 'Store ID'
+    store_id: String(5);
+    @title: ' Name'
+    name: String(40) ;
+    @title: 'Address 1'
+    address_1: String(40);
+    @title: 'Adress 2'
+   address_2: String(100) ;
+    @title: 'City'
+    city: String(20) ;
+    @title: 'State'
+    state: Association to States;
+     @title: 'PIN Code'
+     pincode: String(10);
+}
 
 
