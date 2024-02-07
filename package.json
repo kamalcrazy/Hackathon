@@ -16,7 +16,8 @@
   "scripts": {
     "start": "cds-serve",
     "watch-businesspartner": "cds watch --open businesspartner/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-store": "cds watch --open store/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-store": "cds watch --open store/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-stock": "cds watch --open stock/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "fiori": {
@@ -34,6 +35,7 @@
   },
   "sapux": [
     "app/businesspartner",
-    "app/store"
+    "app/store",
+    "app/stock"
   ]
 }

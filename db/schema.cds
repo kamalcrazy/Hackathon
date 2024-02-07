@@ -21,7 +21,7 @@ entity BuisinessPartner: cuid, managed {
      pincode: String(10);
 
     @title:'Is_GSTN_Registered'
-    is_gstn_registered: Boolean default false;
+    is_gstn_registered: Boolean default true;
     @title:'GSTIN Number'
     is_gstin_number: String(15) @mandatory;
    @title:'IS Vendor'
@@ -55,4 +55,25 @@ entity Store: cuid, managed {
      pincode: String(10);
 }
 
+entity Product : cuid, managed {
+    @title: 'Product ID'
+    product_id: String(5);
+    @title: 'Product Name'
+    product_name: String(40) ;
+    @title: 'Product Image URL'
+    image_url: String(40);
+    @title: 'Product Cost Price'
+     cost_price: String(100) ;
+    @title: 'Product Sell Price'
+    sell_price: String(20) ;
+    
+}
+entity Stock: cuid, managed {
+    @title: 'Store ID'
+    store_id: String(23);
+        @title: 'Product ID'
+    product_id:String(5);
+        @title: 'Stock Quantity'
+    stock_qty: Integer;
+}
 

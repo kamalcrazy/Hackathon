@@ -2,6 +2,8 @@ using { com.kamal.storedb as db } from '../db/schema';
 service StoreDB {
     entity BuisinessPartner as projection on db.BuisinessPartner;
      entity Store as projection on db.Store;
+     entity Product as projection on db.Product;
+      entity Stock as projection on db.Stock;
     entity States as projection on db.States{
         @UI.Hidden: true
         ID,
@@ -12,6 +14,7 @@ service StoreDB {
 annotate StoreDB.BuisinessPartner with @odata.draft.enabled;
 annotate StoreDB.States with @odata.draft.enabled;
 annotate StoreDB.Store  with @odata.draft.enabled;
+annotate StoreDB.Stock  with @odata.draft.enabled;
 annotate StoreDB.BuisinessPartner  with {
     name      @assert.format: '^[a-zA-Z]{2,}$';
     pincode @assert.format: '^[1-9][0-9]{5}$';
@@ -319,3 +322,190 @@ annotate StoreDB.Store  with {
         }
     )
 };
+
+/* Product */
+
+annotate StoreDB.Product with @(
+    UI.LineItem: [
+        {
+            $Type : 'UI.DataField',
+            Value : product_id
+        },
+        
+        {
+            $Type : 'UI.DataField',
+            Value : product_name
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : image_url
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : cost_price
+        },
+          
+              {
+            $Type : 'UI.DataField',
+            Value : sell_price
+        },
+       
+
+    ],
+    UI.SelectionFields: [product_name],    
+    UI.FieldGroup #ProductInformation : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : product_id,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : product_name,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : image_url,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : cost_price,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : sell_price,
+            },
+          
+        ],
+    },
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'ProductInfoFacet',
+            Label : 'ProductInformation',
+            Target : '@UI.FieldGroup#ProductInformation',
+        },
+       /* 
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'StudentLanguagesFacet',
+            Label : 'Student Languages Information',
+            Target : 'Languages/@UI.LineItem',
+        },
+      */  
+    ],
+    
+);
+
+/* Stock */ 
+annotate StoreDB.Stock with @(
+    UI.LineItem: [
+        {
+            $Type : 'UI.DataField',
+            Value : store_id
+        },
+        
+        {
+            $Type : 'UI.DataField',
+            Value : product_id
+        },
+        
+         {
+            Label: 'State',
+            Value: stock_qty
+        },   
+
+    ],
+    UI.SelectionFields: [ name,city],    
+    UI.FieldGroup #StoreInformation : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+            $Type : 'UI.DataField',
+            Value : store_id,
+        },
+        
+        {
+            $Type : 'UI.DataField',
+            Value : product_id,
+        },
+        
+         {
+            Label: 'State',
+            Value: stock_qty,
+        },     
+          
+        ],
+    },
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'St0ckInfoFacet',
+            Label : 'StockInformation',
+            Target : '@UI.FieldGroup#StockInformation',
+        },
+       /* 
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'StudentLanguagesFacet',
+            Label : 'Student Languages Information',
+            Target : 'Languages/@UI.LineItem',
+        },
+      */ 
+    ],
+    
+);
+
+annotate StoreDB.Stock.Store with @(
+    UI.LineItem:[
+        {
+            Label: 'StockStore',
+            Value: Store.store_ID
+        },
+       
+    ],
+
+     UI.FieldGroup #StockStore : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                Value :store_ID ,
+            }
+        ],
+    },
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'StockStoreFacet',
+            Label : 'StockStore',
+            Target : '@UI.FieldGroup#StockStore',
+        },
+    ],  
+);
+annotate StoreDB.Stock.Product with @(
+    UI.LineItem:[
+        {
+            Label: 'StockProduct',
+            Value: Product.product_ID
+        },
+       
+    ],
+
+     UI.FieldGroup #StockProduct : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                Value :product_ID ,
+            }
+        ],
+    },
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'StockProductFacet',
+            Label : 'StockProduct',
+            Target : '@UI.FieldGroup#StockProduct',
+        },
+    ],  
+);
