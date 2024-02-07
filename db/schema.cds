@@ -31,7 +31,7 @@ entity BuisinessPartner: cuid, managed {
    
 }
 
-entity States : cuid, managed {
+entity States: cuid, managed {
     @title: 'Code'
     code: String(3);
     @title: 'Description'

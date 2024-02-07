@@ -11,7 +11,7 @@ service StoreDB {
 }
 annotate StoreDB.BuisinessPartner with @odata.draft.enabled;
 annotate StoreDB.States with @odata.draft.enabled;
-annotate StoreDB.Store with @odata.draft.enabled;
+annotate StoreDB.Store  with @odata.draft.enabled;
 annotate StoreDB.BuisinessPartner  with {
     name      @assert.format: '^[a-zA-Z]{2,}$';
     pincode @assert.format: '^[1-9][0-9]{5}$';
